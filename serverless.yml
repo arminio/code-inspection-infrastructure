@@ -1,0 +1,34 @@
+service: code-inspection
+
+provider:
+  name: aws
+  runtime: java8
+  region: eu-west-2
+  stage: dev
+  timeout: 300
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - s3:GetObject
+      - s3:PutObject
+    Resource:
+      - arn:aws:s3:::ak-code-inspection/*
+package:
+  artifact: target/scala-2.12/code-inspection.jar
+
+functions:
+  inspectCode:
+    memorySize: 1536
+    handler: lds.Handler::handle
+    environment:
+      WEBHOOK_SECRET_KEY: ${env:WEBHOOK_SECRET}
+      GITHUB_PERSONAL_ACCESS_TOKEN: ${env:PAT}
+      REGION: eu-west-2
+    events:
+      - http:
+          path: code-inpection/scan/{configName}
+          method: post
+          cors: true
+
+
+
