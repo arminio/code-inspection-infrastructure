@@ -5,9 +5,9 @@ phases:
     commands:
       - npm install -g serverless serverless@1.20.2
   pre_build:
-    commands:
       - mkdir -p target/scala-2.12
       - aws s3 cp s3://mdtp-delete-this/code-inspection/code-inspection.jar target/scala-2.12/code-inspection.jar
   post_build:
     commands:
+      - sbt assembly
       - serverless deploy --verbose
