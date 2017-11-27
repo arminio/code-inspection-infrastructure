@@ -1,0 +1,10 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - npm install -g serverless serverless@1.20.2
+        sbt assembly
+  post_build:
+    commands:
+      - serverless deploy --verbose
