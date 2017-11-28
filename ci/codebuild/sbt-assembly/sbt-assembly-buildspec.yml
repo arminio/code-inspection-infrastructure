@@ -1,0 +1,26 @@
+#version: 0.1
+#
+#phases:
+#  install:
+#    commands:
+#      - npm install -g serverless serverless@1.20.2
+#  pre_build:
+#      - mkdir -p target/scala-2.12
+#      - aws s3 cp s3://mdtp-delete-this/code-inspection/code-inspection.jar target/scala-2.12/code-inspection.jar
+#  post_build:
+#    commands:
+#      - sbt assembly
+#      - serverless deploy --verbose
+
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - sbt -mem 2000 assembly
+
+artifacts:
+  files:
+    - target/scala-2.12/code-inspection.jar
+  discard-paths: yes
+  #base-directory: location

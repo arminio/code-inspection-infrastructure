@@ -1,0 +1,31 @@
+{
+  "name": "ak-code-inspection-sbt-assembly",
+  "serviceRole": "arn:aws:iam::681503826311:role/service-role/codebuild-code-inspection-service-role",
+  "tags": [],
+  "artifacts": {
+    "packaging": "NONE",
+    "name": "code-inspection",
+    "namespaceType": "NONE",
+    "location": "mdtp-delete-this",
+    "path": "",
+    "type": "S3"
+  },
+
+  "timeoutInMinutes": 10,
+
+  "environment": {
+    "computeType": "BUILD_GENERAL1_SMALL",
+    "image": "1science/sbt",
+    "type": "LINUX_CONTAINER",
+    "environmentVariables": []
+  },
+  "source": {
+    "buildspec": "ci/codebuild/sbt-assembly/sbt-assembly-buildspec.yml",
+    "type": "GITHUB",
+    "location": "https://github.com/arminio/code-inspection-infrastructure.git",
+    "auth": {
+      "type": "OAUTH"
+    }
+  }
+
+}
