@@ -13,3 +13,5 @@ codebuild CLI command to build the jar (via sbt assembly)
 
 codebuild CLI command to deploy the serverless stack (API Gateway/Lambda) 
 `project_root$> aws codebuild create-project --cli-input-json file://ci/codebuild/serverless-deploy/serverless-deploy.json --profile <profile> --region eu-west-2`
+
+
